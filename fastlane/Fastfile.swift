@@ -107,20 +107,22 @@ class Fastfile: LaneFile {
             puts(message: "ERROR: missing or incorrect options")
             exit(1)
         }
-        
+    
         if let xcodeVersion = options["xcodeVersion"] {
             xcodes(version: xcodeVersion)
         }
-        
+    
         buildApp(
             scheme: .userDefined(scheme),
+            configuration: "Release",
             exportMethod: .userDefined("development"),
             skipArchive: .userDefined(false),
             skipCodesigning: .userDefined(true),
-            xcargs: .userDefined("-skipMacroValidation"),
             skipProfileDetection: true,
+            clean: true,
             outputDirectory: "build",
-            outputName: "\(scheme).ipa"
+            outputName: "\(scheme).ipa",
+            xcargs: .userDefined("CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO -skipMacroValidation")
         )
     }
     
