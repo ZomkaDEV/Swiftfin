@@ -66,9 +66,14 @@ jobs:
           command: sudo fastlane buildLane \
             scheme:"\"${{ matrix.scheme }}\"" \
             xcodeVersion:${{ env.XCODE_VERSION }}
+            
+      - name: Find IPA
+        run: |
+          echo "Searching for IPA files..."
+          find . -type f -name "*.ipa"
 
       - name: Upload an unsigned IPA
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.scheme }}-ipa
-          path: build/*.ipa
+          path: **/*.ipa
