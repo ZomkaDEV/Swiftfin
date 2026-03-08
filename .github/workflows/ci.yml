@@ -67,7 +67,7 @@ jobs:
             scheme:"\"${{ matrix.scheme }}\"" \
             xcodeVersion:${{ env.XCODE_VERSION }}
 
-      - name: Upload IPA
+      - name: Upload an unsigned IPA
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.scheme }}-ipa
